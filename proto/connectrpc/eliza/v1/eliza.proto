@@ -26,7 +26,6 @@ service ElizaService {
   // Say is a unary RPC. Eliza responds to the prompt with a single sentence.
   rpc Say(SayRequest) returns (SayResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
-    option deprecated = true;
   }
   // Converse is a bidirectional RPC. The caller may exchange multiple
   // back-and-forth messages with Eliza over a long-lived connection. Eliza
@@ -35,6 +34,11 @@ service ElizaService {
   // Introduce is a server streaming RPC. Given the caller's name, Eliza
   // returns a stream of sentences to introduce itself.
   rpc Introduce(IntroduceRequest) returns (stream IntroduceResponse) {}
+
+  rpc SayDeprecated(SayRequest) returns (SayResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+    option deprecated = true;
+  }
 }
 
 // SayRequest is a single-sentence request.
